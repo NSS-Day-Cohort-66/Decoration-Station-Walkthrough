@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getItems } from "./services/itemsService"
 import "./App.css"
 import { getSeasons } from "./services/seasonsService"
+import { ItemsList } from "./components/ItemsList"
 
 // Initial render
 // state is defined with initial values & js is rendered
@@ -57,20 +58,11 @@ export const App = () => {
           })}
         </select>
       </div>
-      <div className="item-container">
-        {filteredItems.map((item) => {
-          return (
-            <div key={item.id} className="item-card">
-              <img
-                src={item.imageUrl}
-                alt={item.name}
-                className="item-img"
-              ></img>
-              <div className="item-name">{item.name}</div>
-            </div>
-          )
-        })}
-      </div>
+      <ItemsList
+        items={filteredItems}
+        seasons={seasons}
+        seasonChoice={seasonChoice}
+      />
     </>
   )
 }
