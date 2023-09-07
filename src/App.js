@@ -3,6 +3,7 @@ import { getItems } from "./services/itemsService"
 import "./App.css"
 import { getSeasons } from "./services/seasonsService"
 import { ItemsList } from "./components/ItemsList"
+import { NewDecorationForm } from "./components/NewDecorationForm"
 
 // Initial render
 // state is defined with initial values & js is rendered
@@ -58,6 +59,7 @@ export const App = () => {
           })}
         </select>
       </div>
+      <NewDecorationForm />
       <ItemsList
         items={filteredItems}
         seasons={seasons}
