@@ -1,4 +1,15 @@
-export const ItemsList = ({ items }) => {
+import { useEffect, useState } from "react"
+import { getItems } from "../services/itemsService"
+
+export const ItemsList = () => {
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    getItems().then((itemsArray) => {
+      setItems(itemsArray)
+    })
+  }, [])
+
   return (
     <div className="item-container">
       {items.map((item) => {
