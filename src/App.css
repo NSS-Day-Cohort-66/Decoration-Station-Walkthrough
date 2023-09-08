@@ -67,6 +67,7 @@ fieldset {
   border: none;
   color: white;
   border-radius: 7px;
+  cursor: pointer;
 }
 
 .form-group {

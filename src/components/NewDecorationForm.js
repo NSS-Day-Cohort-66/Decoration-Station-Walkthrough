@@ -2,11 +2,19 @@ import { useEffect, useState } from "react"
 import { getSeasons } from "../services/seasonsService"
 import { getCategories } from "../services/categoryService"
 import { postItem } from "../services/itemsService"
+import { useNavigate } from "react-router-dom"
 
 export const NewDecorationForm = () => {
   const [seasons, setSeasons] = useState([])
   const [categories, setCategories] = useState([])
-  const [newItem, setNewItem] = useState({})
+  const [newItem, setNewItem] = useState({
+    name: "",
+    imageUrl: "",
+    categoryId: 0,
+    seasonId: 0,
+  })
+
+  const navigate = useNavigate() // returns a function that allows us to "navigate" to a given url
 
   useEffect(() => {
     getSeasons().then((seasonsArray) => {
@@ -34,7 +42,9 @@ export const NewDecorationForm = () => {
       categoryId: parseInt(newItem.categoryId),
     }
 
-    postItem(newDecorItem)
+    postItem(newDecorItem).then(() => {
+      navigate("/")
+    })
   }
 
   return (
@@ -44,6 +54,7 @@ export const NewDecorationForm = () => {
         <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input
+            value={newItem.name}
             name="name"
             type="text"
             className="form-control"
@@ -56,6 +67,7 @@ export const NewDecorationForm = () => {
         <div className="form-group">
           <label htmlFor="imgUrl">Image URL:</label>
           <input
+            value={newItem.imageUrl}
             name="imageUrl"
             type="text"
             className="form-control"
@@ -87,7 +99,12 @@ export const NewDecorationForm = () => {
       <fieldset>
         <div className="form-group">
           <div>Category:</div>
-          <select name="categoryId" onChange={handleInputChange}>
+          <select
+            name="categoryId"
+            onChange={handleInputChange}
+            value={newItem.categoryId}
+          >
+            <option value={0}>Please select a category</option>
             {categories.map((catObj) => {
               return (
                 <option key={catObj.id} value={catObj.id}>
