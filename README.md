@@ -1,0 +1,2 @@
+# Creating a Form
+In this session of Decoration Station workshop, we talked about forms and how to capture user input from them. We created a new component, `NewDecorationForm` for the user to add a new decoration to the database. We talked about the `onChange` event listener, setting state for an object, and `event.preventDefault()`. The user is now able to successfully post a new item to the database.
