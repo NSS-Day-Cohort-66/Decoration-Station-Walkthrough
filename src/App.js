@@ -21,15 +21,7 @@ export const App = () => {
         <Route path="items">
           <Route path=":itemId" element={<ItemDetails />} />{" "}
           {/* This Route will render when the url is localhost:3000/items/[some id] */}
-          <Route
-            path="new"
-            element={
-              <>
-                <NewDecorationForm />
-                <ItemsList />
-              </>
-            }
-          />
+          <Route path="new" element={<NewDecorationForm />} />
         </Route>
 
         {/* Fun routes for learning */}
