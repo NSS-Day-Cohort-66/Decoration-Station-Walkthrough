@@ -43,7 +43,7 @@ export const NewDecorationForm = () => {
     }
 
     postItem(newDecorItem).then(() => {
-      // navigate("/")
+      navigate("/")
     })
   }
 
