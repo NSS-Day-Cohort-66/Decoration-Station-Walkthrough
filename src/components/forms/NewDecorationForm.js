@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { getSeasons } from "../services/seasonsService"
-import { getCategories } from "../services/categoryService"
-import { postItem } from "../services/itemsService"
+import { getSeasons } from "../../services/seasonsService"
+import { getCategories } from "../../services/categoryService"
+import { postItem } from "../../services/itemsService"
 import { useNavigate } from "react-router-dom"
 
 export const NewDecorationForm = () => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getItems } from "../services/itemsService"
+import { getItems } from "../../services/itemsService"
 import { useNavigate } from "react-router-dom"
 
 export const ItemsList = () => {

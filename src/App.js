@@ -1,9 +1,10 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import "./App.css"
-import { ItemsList } from "./components/ItemsList"
-import { NewDecorationForm } from "./components/NewDecorationForm"
+import { ItemsList } from "./components/items/ItemsList"
+import { NewDecorationForm } from "./components/forms/NewDecorationForm"
 import { NavBar } from "./components/nav/NavBar"
-import { ItemDetails } from "./components/ItemDetails"
+import { ItemDetails } from "./components/items/ItemDetails"
+import { EditDecoration } from "./components/forms/EditDecoration"
 
 export const App = () => {
   return (
@@ -20,8 +21,7 @@ export const App = () => {
         <Route index element={<ItemsList />} />
         <Route path="items">
           <Route path=":itemId" element={<ItemDetails />} />
-          <Route path=":otherThing/thing" element={<>Does this work?</>} />
-          {/* This Route will render when the url is localhost:3000/items/[some id] */}
+          <Route path=":itemId/edit" element={<EditDecoration />} />
           <Route path="new" element={<NewDecorationForm />} />
         </Route>
       </Route>
