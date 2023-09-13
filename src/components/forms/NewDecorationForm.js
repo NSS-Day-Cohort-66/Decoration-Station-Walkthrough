@@ -85,6 +85,7 @@ export const NewDecorationForm = () => {
                 <label>
                   <input
                     type="radio"
+
                     name="seasonId"
                     value={seasonObj.id}
                     onChange={handleInputChange}
