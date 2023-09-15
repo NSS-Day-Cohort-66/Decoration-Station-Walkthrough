@@ -19,3 +19,13 @@ export const getItemById = (id) => {
     `http://localhost:8088/items/${id}?_expand=season&_expand=category`
   ).then((res) => res.json())
 }
+
+export const editItem = (item) => {
+  return fetch(`http://localhost:8088/items/${item.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(item),
+  })
+}
