@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { getItemById } from "../../services/itemsService"
+import { useParams, useNavigate } from "react-router-dom"
+import { editItem, getItemById } from "../../services/itemsService"
 import { getSeasons } from "../../services/seasonsService"
 import { getCategories } from "../../services/categoryService"
 
@@ -10,6 +10,7 @@ export const EditDecoration = () => {
   const [categories, setCategories] = useState([])
 
   const { itemId } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     getSeasons().then((seasonsArr) => {
@@ -27,6 +28,22 @@ export const EditDecoration = () => {
     })
   }, [itemId])
 
+  const handleSave = (event) => {
+    event.preventDefault()
+
+    const updatedItem = {
+      id: item.id,
+      name: item.name,
+      imageUrl: item.imageUrl,
+      seasonId: item.seasonId,
+      categoryId: item.categoryId,
+    }
+
+    editItem(updatedItem).then(() => {
+      navigate(`/items/${itemId}`)
+    })
+  }
+
   return (
     <form className="decoration-form">
       <h2 className="decoration-form-title">Edit decoration</h2>
@@ -35,7 +52,7 @@ export const EditDecoration = () => {
           <label htmlFor="name">Name:</label>
           <input
             name="name"
-            value={item.name}
+            value={item.name ? item.name : ""}
             type="text"
             className="form-control"
             placeholder="item name"
@@ -52,7 +69,7 @@ export const EditDecoration = () => {
           <label htmlFor="imgUrl">Image URL:</label>
           <input
             name="imageUrl"
-            value={item.imageUrl}
+            value={item.imageUrl ? item.imageUrl : ""}
             type="text"
             className="form-control"
             placeholder="https://www.example.com"
@@ -76,6 +93,11 @@ export const EditDecoration = () => {
                     name="seasonId"
                     value={seasonObj.id}
                     checked={seasonObj.id === item.seasonId}
+                    onChange={(event) => {
+                      const itemCopy = { ...item }
+                      itemCopy.seasonId = parseInt(event.target.value)
+                      setItem(itemCopy)
+                    }}
                   />
                   {seasonObj.name}
                 </label>
@@ -87,7 +109,15 @@ export const EditDecoration = () => {
       <fieldset>
         <div className="form-group">
           <div>Category:</div>
-          <select name="categoryId" value={item.categoryId}>
+          <select
+            name="categoryId"
+            value={item.categoryId}
+            onChange={(event) => {
+              const itemCopy = { ...item }
+              itemCopy.categoryId = parseInt(event.target.value)
+              setItem(itemCopy)
+            }}
+          >
             <option value={0}>Please select a category</option>
             {categories.map((categoryObj) => {
               return (
@@ -99,7 +129,9 @@ export const EditDecoration = () => {
           </select>
         </div>
       </fieldset>
-      <button className="btn">Add Decoration</button>
+      <button className="btn" onClick={handleSave}>
+        Add Decoration
+      </button>
     </form>
   )
 }
