@@ -29,3 +29,9 @@ export const editItem = (item) => {
     body: JSON.stringify(item),
   })
 }
+
+export const getItemsBySeasonId = (seasonId) => {
+  return fetch(`http://localhost:8088/items?seasonId=${seasonId}`).then((res) =>
+    res.json()
+  )
+}
