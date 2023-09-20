@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { getItemsBySeasonId } from "../../services/itemsService"
+import { ItemsList } from "./ItemsList"
 
 export const SeasonalItems = () => {
   const [items, setItems] = useState([])
@@ -8,7 +9,6 @@ export const SeasonalItems = () => {
   const { seasonId } = useParams() // { seasonId: 3 }
   // Without destructuring:
   // const paramsObj = useParams() -> paramsObj.seasonId
-  const navigate = useNavigate()
 
   useEffect(() => {
     getItemsBySeasonId(seasonId).then((itemsArr) => {
@@ -16,23 +16,5 @@ export const SeasonalItems = () => {
     })
   }, [seasonId])
 
-  return (
-    <div className="item-container">
-      {items.map((item) => {
-        return (
-          <div key={item.id} className="item-card">
-            <img
-              src={item.imageUrl}
-              alt={item.name}
-              className="item-img"
-              onClick={() => {
-                navigate(`/items/${item.id}`)
-              }}
-            ></img>
-            <div className="item-name">{item.name}</div>
-          </div>
-        )
-      })}
-    </div>
-  )
+  return <ItemsList itemsArray={items} />
 }

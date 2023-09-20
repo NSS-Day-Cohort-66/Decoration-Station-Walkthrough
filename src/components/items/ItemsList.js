@@ -1,21 +1,11 @@
-import { useEffect, useState } from "react"
-import { getItems } from "../../services/itemsService"
 import { useNavigate } from "react-router-dom"
 
-export const ItemsList = () => {
-  const [items, setItems] = useState([])
-
+export const ItemsList = ({ itemsArray }) => {
   const navigate = useNavigate()
-
-  useEffect(() => {
-    getItems().then((itemsArray) => {
-      setItems(itemsArray)
-    })
-  }, [])
 
   return (
     <div className="item-container">
-      {items.map((item) => {
+      {itemsArray.map((item) => {
         return (
           <div key={item.id} className="item-card">
             <img
