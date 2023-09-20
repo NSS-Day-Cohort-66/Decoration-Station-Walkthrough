@@ -6,6 +6,7 @@ import { NavBar } from "./components/nav/NavBar"
 import { ItemDetails } from "./components/items/ItemDetails"
 import { EditDecoration } from "./components/forms/EditDecoration"
 import { SeasonalItems } from "./components/items/SeasonalItems"
+import { AllItems } from "./components/items/AllItems"
 
 export const App = () => {
   return (
@@ -19,7 +20,7 @@ export const App = () => {
           </>
         }
       >
-        <Route index element={<ItemsList />} />
+        <Route index element={<AllItems />} />
         <Route path="items">
           <Route path=":itemId" element={<ItemDetails />} />
           <Route path=":itemId/edit" element={<EditDecoration />} />
