@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom"
-import { getItemById } from "../../services/itemsService"
+import { deleteItem, getItemById } from "../../services/itemsService"
 import { useEffect, useState } from "react"
 
 export const ItemDetails = () => {
@@ -14,6 +14,12 @@ export const ItemDetails = () => {
     })
   }, [itemId])
 
+  const handleDelete = () => {
+    deleteItem(itemId).then(() => {
+      navigate(-1)
+    })
+  }
+
   return (
     <div className="item-detail-container">
       <h3 className="item-detail-name">Item details for item: {item.name}</h3>
@@ -27,6 +33,7 @@ export const ItemDetails = () => {
       >
         Edit
       </button>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   )
 }

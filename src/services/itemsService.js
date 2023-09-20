@@ -35,3 +35,7 @@ export const getItemsBySeasonId = (seasonId) => {
     res.json()
   )
 }
+
+export const deleteItem = (itemId) => {
+  return fetch(`http://localhost:8088/items/${itemId}`, { method: "DELETE" })
+}
